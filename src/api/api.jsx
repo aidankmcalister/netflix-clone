@@ -39,4 +39,34 @@ const fetchPopularMovies = async () => {
   }
 };
 
-export { fetchMovieDetails, fetchMovieImages, fetchPopularMovies };
+const fetchTrendingMovies = async () => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1`
+    );
+    return response.data.results.slice(0, 25);
+  } catch (error) {
+    console.error("Error fetching trending movies:", error);
+    throw error;
+  }
+};
+
+const fetchTrendingShows = async () => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/trending/tv/day?api_key=${API_KEY}&language=en-US&page=1`
+    );
+    return response.data.results.slice(0, 25);
+  } catch (error) {
+    console.error("Error fetching trending shows:", error);
+    throw error;
+  }
+};
+
+export {
+  fetchMovieDetails,
+  fetchMovieImages,
+  fetchPopularMovies,
+  fetchTrendingMovies,
+  fetchTrendingShows,
+};

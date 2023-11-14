@@ -15,5 +15,8 @@ export default defineConfig(({ mode }) => {
         env.REACT_APP_TMDB_API_KEY
       ),
     },
+    optimizeDeps: {
+      exclude: ["react-muli-carousel"],
+    },
   };
 });
