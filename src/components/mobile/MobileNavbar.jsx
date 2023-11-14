@@ -35,7 +35,13 @@ const MobileNavbar = ({ currentPage }) => {
             ) : (
               <HomeIconOutline className={iconClasses} />
             )}
-            <p className={`${isCurrentPage("home") ? "font-bold" : ""}`}>
+            <p
+              className={`${
+                isCurrentPage("home")
+                  ? "font-bold transition-all scale-110"
+                  : "scale-90 transition-all text-gray-500"
+              }`}
+            >
               Home
             </p>
           </Link>
@@ -47,7 +53,13 @@ const MobileNavbar = ({ currentPage }) => {
             ) : (
               <StarIconOutline className={iconClasses} />
             )}
-            <p className={`${isCurrentPage("favorites") ? "font-bold" : ""}`}>
+            <p
+              className={`${
+                isCurrentPage("favorites")
+                  ? "font-bold transition-all scale-110"
+                  : "scale-90 transition-all text-gray-500"
+              }`}
+            >
               Favorites
             </p>
           </Link>
@@ -56,7 +68,11 @@ const MobileNavbar = ({ currentPage }) => {
           <Link to="/mobilesearch" className={linkClasses("search")}>
             <MagnifyingGlassIconOutline className={iconClasses} />
             <p
-              className={`${isCurrentPage("mobilesearch") ? "font-bold" : ""}`}
+              className={`${
+                isCurrentPage("mobilesearch")
+                  ? "font-bold transition-all scale-110"
+                  : "scale-90 transition-all text-gray-500"
+              }`}
             >
               Search
             </p>
@@ -65,7 +81,13 @@ const MobileNavbar = ({ currentPage }) => {
         <li className={listItemClasses}>
           <Link to="/downloads" className={linkClasses("downloads")}>
             <ArrowIconOutline className={iconClasses} />
-            <p className={`${isCurrentPage("downloads") ? "font-bold" : ""}`}>
+            <p
+              className={`${
+                isCurrentPage("downloads")
+                  ? "font-bold transition-all scale-110"
+                  : "scale-90 transition-all text-gray-500"
+              }`}
+            >
               Downloads
             </p>
           </Link>
@@ -73,7 +95,13 @@ const MobileNavbar = ({ currentPage }) => {
         <li className={listItemClasses}>
           <Link to="/settings" className={linkClasses("settings")}>
             <BarsIconOutline className={iconClasses} />
-            <p className={`${isCurrentPage("settings") ? "font-bold" : ""}`}>
+            <p
+              className={`${
+                isCurrentPage("settings")
+                  ? "font-bold transition-all scale-110"
+                  : "scale-90 transition-all text-gray-500"
+              }`}
+            >
               Settings
             </p>
           </Link>
