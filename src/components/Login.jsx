@@ -3,13 +3,17 @@ import { validateLogin } from "../utils/validateLogin";
 import { Button, Checkbox } from "@material-tailwind/react";
 import netflixLogo from "../assets/imgs/netflixLogo.png";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUsername } from "../redux/userSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (values, { setSubmitting }) => {
     setTimeout(() => {
       setSubmitting(false);
+      dispatch(setUsername(values.username));
       navigate("/");
     }, 400);
   };

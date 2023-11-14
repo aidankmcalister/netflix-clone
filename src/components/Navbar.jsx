@@ -1,7 +1,9 @@
-import React from "react";
+import { useSelector } from "react-redux";
+import { selectUsername } from "../redux/userSlice";
 
 const Navbar = () => {
-  return <div>Navbar</div>;
+  const username = useSelector(selectUsername);
+  return <div>Welcome, {username}!</div>;
 };
 
 export default Navbar;
