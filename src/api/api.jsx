@@ -63,10 +63,44 @@ const fetchTrendingShows = async () => {
   }
 };
 
+const fetchRandomContinueWatching = async () => {
+  try {
+    const randomCountTV = Math.floor(Math.random() * 6) + 1;
+    const randomCountMovies =
+      Math.floor(Math.random() * (6 - randomCountTV)) + 1;
+    const responseTV = await axios.get(
+      `${BASE_URL}/trending/tv/day?api_key=${API_KEY}&language=en-US&page=1`
+    );
+    const responseMovies = await axios.get(
+      `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1`
+    );
+
+    const trendingTVShows = responseTV.data.results
+      .slice(4)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, randomCountTV);
+    const trendingMovies = responseMovies.data.results
+      .slice(4)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, randomCountMovies);
+
+    const continueWatchingList = [...trendingTVShows, ...trendingMovies].slice(
+      0,
+      6
+    );
+
+    return continueWatchingList;
+  } catch (error) {
+    console.error("Error fetching random media:", error);
+    throw error;
+  }
+};
+
 export {
   fetchMovieDetails,
   fetchMovieImages,
   fetchPopularMovies,
   fetchTrendingMovies,
   fetchTrendingShows,
+  fetchRandomContinueWatching,
 };
