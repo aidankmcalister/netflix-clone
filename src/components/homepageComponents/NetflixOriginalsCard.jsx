@@ -52,7 +52,12 @@ const NetflixOriginalsCard = () => {
         content={netflixOriginals.map((media, index) => {
           return (
             <div key={index} className="relative mr-3 w-[10rem]">
-              <Link to={`/content/${media.id}`}>
+              <Link
+                to={{
+                  pathname: `/content/${media.id}`,
+                  search: `?mediaObject=${JSON.stringify(media)}`,
+                }}
+              >
                 <img
                   src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
                   alt={media.title}

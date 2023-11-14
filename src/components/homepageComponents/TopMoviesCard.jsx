@@ -25,8 +25,12 @@ const TopMoviesCard = () => {
     fetchTopMovies();
   }, []);
 
-  function handleSubmit(movie) {
-    navigate(`/content/${movie.id}`);
+  function handleSubmit(media) {
+    if (media && media.id) {
+      navigate(`/content/${media.id}?mediaObject=${JSON.stringify(media)}`);
+    } else {
+      console.error("Invalid media object:", media);
+    }
   }
 
   const handleAddToList = (media) => {

@@ -1,4 +1,3 @@
-// import { BookmarkIcon as BookmarkSolid } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -49,7 +48,12 @@ const ContinueWatchingCard = () => {
   useEffect(() => {
     const getContinued = async () => {
       const continueWatchingData = await fetchRandomContinueWatching();
-      setContinueWatching(continueWatchingData);
+      setContinueWatching(
+        continueWatchingData.map((media) => ({
+          ...media,
+          progressBarWidth: generateRandomWidth(),
+        }))
+      );
     };
     getContinued();
   }, []);
@@ -71,35 +75,44 @@ const ContinueWatchingCard = () => {
     <div>
       <h1 className="text-xl font-bold mb-2">Continue Watching</h1>
       <ContinueCarousel
-        content={continueWatching.map((media, index) => {
-          const progressBarWidth = generateRandomWidth();
-          return (
-            <div key={index} className="relative mr-3 w-[10rem]">
-              <Link to={`/content/${media.id}`}>
-                <img
-                  src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
-                  alt={media.title}
-                  className="rounded-lg"
+        content={continueWatching.map((media, index) => (
+          <div key={index} className="relative mr-3 w-[10rem]">
+            <Link
+              to={{
+                pathname: `/content/${media.id}`,
+                search: `?mediaObject=${JSON.stringify(media)}`,
+              }}
+            >
+              <img
+                src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
+                alt={media.title}
+                className="rounded-lg"
+              />
+            </Link>
+            <div className="w-full rounded-b-lg absolute bottom-0">
+              <div className="w-full bg-gray-600 h-1">
+                <div
+                  style={{ width: `${media.progressBarWidth}%` }}
+                  className={`bg-main-red h-full`}
+                ></div>
+              </div>
+              <div className="bg-gray-900 px-1 py-1 flex items-center justify-between rounded-b-lg">
+                <Link
+                  to={{
+                    pathname: `/content/${media.id}`,
+                    search: `?mediaObject=${JSON.stringify(media)}`,
+                  }}
+                >
+                  <InformationCircleIcon className="w-7" />
+                </Link>
+                <BookmarkOutline
+                  className="w-[1.75rem]"
+                  onClick={() => handleBookmarkClick(media)}
                 />
-                <div className="w-full rounded-b-lg absolute  bottom-0  ">
-                  <div className="w-full bg-gray-600 h-1">
-                    <div
-                      style={{ width: `${progressBarWidth}%` }}
-                      className={`bg-main-red h-full`}
-                    ></div>
-                  </div>
-                  <div className="bg-gray-900 px-1 py-1 flex items-center justify-between rounded-b-lg">
-                    <InformationCircleIcon className="w-7" />
-                    <BookmarkOutline
-                      className="w-[1.75rem]"
-                      onClick={() => handleBookmarkClick(media)}
-                    />
-                  </div>
-                </div>
-              </Link>
+              </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       />
     </div>
   );
