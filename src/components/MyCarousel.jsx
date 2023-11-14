@@ -1,17 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 const MyCarousel = ({ content }) => {
-  const carouselRef = useRef(null);
-
-  const handleDragStart = (e) => {
-    // Prevent vertical scrolling during dragging
-    e.preventDefault();
-    // Optionally, you can also prevent the default drag and drop behavior
-    e.dataTransfer.dropEffect = "move";
-  };
-
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -31,13 +22,7 @@ const MyCarousel = ({ content }) => {
   };
 
   return (
-    <Carousel
-      ref={carouselRef}
-      swipeable={true}
-      draggable={true}
-      responsive={responsive}
-      onDragStart={handleDragStart}
-    >
+    <Carousel swipeable={true} draggable={true} responsive={responsive}>
       {content}
     </Carousel>
   );

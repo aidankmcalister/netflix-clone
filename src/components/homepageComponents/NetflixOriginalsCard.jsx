@@ -2,7 +2,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { fetchNetflixOriginals } from "../../api/api";
 import { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 const OriginalsCarousel = ({ content }) => {
   const responsive = {
     desktop: {
@@ -52,11 +52,13 @@ const NetflixOriginalsCard = () => {
         content={netflixOriginals.map((media, index) => {
           return (
             <div key={index} className="relative mr-3 w-[10rem]">
-              <img
-                src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
-                alt={media.title}
-                className="rounded-lg"
-              />
+              <Link to={`/content/${media.id}`}>
+                <img
+                  src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
+                  alt={media.title}
+                  className="rounded-lg"
+                />
+              </Link>
             </div>
           );
         })}

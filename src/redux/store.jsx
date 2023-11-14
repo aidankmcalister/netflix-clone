@@ -1,8 +1,9 @@
 // store.jsx
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./userSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import userReducer from "./userSlice";
+import favoritesReducer from "./favoritesSlice";
 
 const userPersistConfig = {
   key: "user",
@@ -14,6 +15,7 @@ const persistedUserReducer = persistReducer(userPersistConfig, userReducer);
 const store = configureStore({
   reducer: {
     user: persistedUserReducer,
+    favorites: favoritesReducer,
   },
 });
 

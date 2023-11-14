@@ -169,18 +169,45 @@ const fetchMediaByGenre = async ({ media, genre, originalLanguage }) => {
     const response = await axios.get(apiUrl);
     const results = response.data.results;
 
-    // console.log(
-    //   `Fetched ${results.length} ${media} in the ${genre} genre from page 1. First few titles:`,
-    //   results.slice(0, 5).map((item) => item.title)
-    // );
-    console.log(
-      `Fetched ${results.length} ${media} in the ${genre} genre from page 1. First few titles:`,
-      results.slice(0, 5).map((item) => item.title)
-    );
-
     return results;
   } catch (error) {
     console.error("Error fetching data:", error);
+  }
+};
+
+const fetchActorsFromMediaId = async ({ id, mediaType }) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/${mediaType}/${id}/credits?api_key=${API_KEY}`
+    );
+
+    const cast = response.data.cast;
+    return cast;
+  } catch (error) {
+    console.error(`Error fetching actors for ${mediaType} ID ${id}:`, error);
+    throw error;
+  }
+};
+
+// api.js
+
+const fetchActorDetails = async (actorId) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/person/${actorId}?api_key=${API_KEY}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch actor details");
+    }
+
+    const actorDetails = await response.json();
+    return {
+      name: actorDetails.name,
+      profile_path: actorDetails.profile_path,
+      biography: actorDetails.biography,
+    };
+  } catch (error) {
+    throw new Error(`Error in fetchActorDetails: ${error.message}`);
   }
 };
 
@@ -193,4 +220,6 @@ export {
   fetchRandomContinueWatching,
   fetchMediaByGenre,
   fetchNetflixOriginals,
+  fetchActorsFromMediaId,
+  fetchActorDetails,
 };

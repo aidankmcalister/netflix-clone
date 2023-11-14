@@ -7,9 +7,8 @@ import MobileSearch from "./components/mobile/MobileSearch";
 import ProfileSelect from "./components/ProfileSelect";
 import MobileNavbar from "./components/mobile/MobileNavbar";
 import Navbar from "./components/Navbar";
-import FavoritesPage from "./pages/FavoritesPage";
 import SettingsPage from "./pages/SettingsPage";
-import DownloadsPage from "./pages/DownloadsPage";
+import MyListPage from "./pages/MyListPage";
 
 function App() {
   const location = useLocation();
@@ -24,7 +23,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="">
+    <div className={`font-poppins relative overflow-x-hidden min-h-screen`}>
       {!isNavbarHidden && (
         <div className="hidden md:block">
           <Navbar />
@@ -35,11 +34,11 @@ function App() {
         <Route path="/profileselect" element={<ProfileSelect />} />
         <Route path="/mobilesearch" element={<MobileSearch />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/content" element={<ContentPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
+        <Route path="/content/:id" element={<ContentPage />} />
+        <Route path="/mylist" element={<MyListPage />} />
         <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/downloads" element={<DownloadsPage />} />
       </Routes>
+      <div className="h-20"></div>
       {!isNavbarHidden && (
         <div className="block md:hidden fixed bottom-0 w-full">
           <MobileNavbar currentPage={currentPage} />

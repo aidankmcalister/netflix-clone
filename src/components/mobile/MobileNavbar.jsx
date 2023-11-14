@@ -2,14 +2,12 @@ import { Link } from "react-router-dom";
 import {
   HomeIcon as HomeIconOutline,
   MagnifyingGlassIcon as MagnifyingGlassIconOutline,
-  ArrowDownIcon as ArrowIconOutline,
   StarIcon as StarIconOutline,
   Bars3BottomRightIcon as BarsIconOutline,
 } from "@heroicons/react/24/outline";
 import {
   HomeIcon as HomeIconSolid,
   MagnifyingGlassIcon as MagnifyingGlassIconSolid,
-  ArrowDownIcon as ArrowIconSolid,
   StarIcon as StarIconSolid,
   Bars3BottomRightIcon as BarsIconSolid,
 } from "@heroicons/react/24/solid";
@@ -47,20 +45,20 @@ const MobileNavbar = ({ currentPage }) => {
           </Link>
         </li>
         <li className={listItemClasses}>
-          <Link to="/favorites" className={linkClasses("favorites")}>
-            {isCurrentPage("favorites") ? (
+          <Link to="/mylist" className={linkClasses("mylist")}>
+            {isCurrentPage("mylist") ? (
               <StarIconSolid className={iconClasses} />
             ) : (
               <StarIconOutline className={iconClasses} />
             )}
             <p
               className={`${
-                isCurrentPage("favorites")
+                isCurrentPage("mylist")
                   ? "font-bold transition-all scale-110"
                   : "scale-90 transition-all text-gray-500"
               }`}
             >
-              Favorites
+              My List
             </p>
           </Link>
         </li>
@@ -75,20 +73,6 @@ const MobileNavbar = ({ currentPage }) => {
               }`}
             >
               Search
-            </p>
-          </Link>
-        </li>
-        <li className={listItemClasses}>
-          <Link to="/downloads" className={linkClasses("downloads")}>
-            <ArrowIconOutline className={iconClasses} />
-            <p
-              className={`${
-                isCurrentPage("downloads")
-                  ? "font-bold transition-all scale-110"
-                  : "scale-90 transition-all text-gray-500"
-              }`}
-            >
-              Downloads
             </p>
           </Link>
         </li>

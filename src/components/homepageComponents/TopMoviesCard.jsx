@@ -3,9 +3,19 @@ import { fetchPopularMovies } from "../../api/api";
 import { Button, Carousel } from "@material-tailwind/react";
 import netflixLogo from "../../assets/imgs/netflixLogo.png";
 import { PlusIcon, PlayIcon } from "@heroicons/react/24/solid";
+import {
+  addToFavorites,
+  removeFromFavorites,
+  selectFavorites,
+} from "../../redux/favoritesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const TopMoviesCard = () => {
+  const dispatch = useDispatch();
+  const favorites = useSelector(selectFavorites);
   const [topMovies, setTopMovies] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTopMovies = async () => {
@@ -16,12 +26,18 @@ const TopMoviesCard = () => {
   }, []);
 
   function handleSubmit(movie) {
-    console.log(`Movie Id: ${movie.id}`);
+    navigate(`/content/${movie.id}`);
   }
-  function addToMyList(movie) {
-    console.log(`Added ${movie.title} to list`);
-    console.log(`Movie Id: ${movie.id}`);
-  }
+
+  const handleAddToList = (media) => {
+    const isFavorite = favorites.some((favorite) => favorite.id === media.id);
+    if (isFavorite) {
+      dispatch(removeFromFavorites(media.id));
+    } else {
+      dispatch(addToFavorites(media));
+    }
+  };
+
   return (
     <div>
       <img
@@ -52,7 +68,7 @@ const TopMoviesCard = () => {
           <div key={movie.id} className="relative w-full h-full">
             <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
             <img
-              src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              src={`http://image.tmdb.org/t/p/original/${movie.poster_path}`}
               alt={movie.title}
               className="w-full h-full object-cover"
             />
@@ -65,8 +81,8 @@ const TopMoviesCard = () => {
                 Play
               </Button>
               <Button
-                onClick={() => addToMyList(movie)}
                 className="flex items-center h-12 px-3 bg-gray-800"
+                onClick={() => handleAddToList(movie)}
               >
                 <PlusIcon className="w-4 mr-2" />
                 My List

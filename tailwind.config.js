@@ -7,7 +7,11 @@ module.exports = withMT({
     colors: {
       "main-red": "var(--main-red)",
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 });

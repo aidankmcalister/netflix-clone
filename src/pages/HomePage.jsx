@@ -45,7 +45,6 @@ const HomePage = () => {
       <div className="w-[90%] mx-auto mt-7">
         <AnimeMoviesCard />
       </div>
-      <div className="h-20"></div>
     </div>
   );
 };

@@ -9,8 +9,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  /* background-color: #242424; */
-  /* background: #242424; */
   background: #181818;
 
   font-synthesis: none;
@@ -21,4 +19,3 @@
 
   --main-red: #e50914;
 }
-/* linear-gradient(90deg, hsla(357, 93%, 22%, 1) 0%, hsla(0, 0%, 14%, 1) 100%); */
