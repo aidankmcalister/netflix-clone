@@ -1,32 +1,63 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { validateLogin } from "../utils/validateLogin";
+import { Button, Checkbox } from "@material-tailwind/react";
+import netflixLogo from "../assets/imgs/netflixLogo.png";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const handleSubmit = () => {
-    (values, { setSubmitting }) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        setSubmitting(false);
-      }, 400);
-    };
+  const navigate = useNavigate();
+
+  const handleSubmit = (values, { setSubmitting }) => {
+    setTimeout(() => {
+      setSubmitting(false);
+      navigate("/");
+    }, 400);
   };
+
   return (
-    <div>
-      <img src="" alt="netflixLogo" />
+    <div className="w-[70%] flex flex-col items-center">
+      <img src={netflixLogo} alt="netflixLogo" className="w-16" />
       <Formik
-        initialValues={{ email: "", password: "" }}
+        initialValues={{ username: "", password: "" }}
         validate={validateLogin}
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className="flex border">
-            <Field type="email" name="email" />
-            <ErrorMessage name="email" component="div" />
-            <Field type="password" name="password" />
-            <ErrorMessage name="password" component="div" />
-            <button type="submit" disabled={isSubmitting}>
+          <Form className="w-full">
+            <div className="mb-7 mt-5">
+              <Field
+                type="text"
+                name="username" // Updated field name to 'username'
+                placeholder="Enter Username"
+                className="p-3 rounded-lg w-full text-sm"
+              />
+              <ErrorMessage
+                name="username"
+                component="div"
+                className="absolute text-sm text-red-400"
+              />
+            </div>
+            <div className="mb-7">
+              <Field
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                className="p-3 rounded-lg w-full text-sm"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="absolute text-sm text-red-400"
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-main-red mb-3"
+            >
               Sign In
-            </button>
+            </Button>
+            <Checkbox color="red" label="Remember Me" />
           </Form>
         )}
       </Formik>

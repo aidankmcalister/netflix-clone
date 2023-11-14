@@ -10,8 +10,6 @@ import Navbar from "./components/Navbar";
 
 function App() {
   const location = useLocation();
-  console.log("Current Location:", location.pathname);
-
   const hiddenNavbarPaths = ["/login", "/profileselect"];
   const isNavbarHidden = hiddenNavbarPaths.includes(location.pathname);
 
