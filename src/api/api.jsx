@@ -96,6 +96,71 @@ const fetchRandomContinueWatching = async () => {
   }
 };
 
+const fetchMediaByGenre = async ({ media, genre }) => {
+  const genreMapTv = {
+    action: 28,
+    adventure: 12,
+    animation: 16,
+    comedy: 35,
+    crime: 80,
+    documentary: 99,
+    drama: 18,
+    family: 10751,
+    fantasy: 14,
+    history: 36,
+    horror: 27,
+    music: 10402,
+    mystery: 9648,
+    romance: 10749,
+    "science fiction": 878,
+    "tv movie": 10770,
+    thriller: 53,
+    war: 10752,
+    western: 37,
+  };
+  try {
+    const genreNum = genreMapTv[genre.toLowerCase()];
+    if (genreNum === undefined) {
+      console.log(`Unknown genre: ${genre}`);
+      return;
+    }
+
+    const response = await axios.get(
+      `${BASE_URL}/discover/${media}?api_key=${API_KEY}&with_genres=${genreNum}`
+    );
+
+    console.log("Complete API Response:", response.data);
+
+    const slicedData = response.data.results.slice(0, 25);
+    console.log(
+      `Fetching ${media} in the ${genre} genre (genreNum: ${genreNum}):`,
+      slicedData
+    );
+
+    return slicedData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+const fetchAnime = async (keyword) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=en-US&page=1&with_genres=16&query=${keyword}&include_adult=false`
+    );
+
+    const easternAnime = response.data.results.filter((show) => {
+      const easternLanguages = ["ja", "zh", "ko"];
+      return easternLanguages.includes(show.original_language);
+    });
+
+    return easternAnime.slice(0, 25);
+  } catch (error) {
+    console.error("Error fetching anime:", error);
+    throw error;
+  }
+};
+
 export {
   fetchMovieDetails,
   fetchMovieImages,
@@ -103,4 +168,6 @@ export {
   fetchTrendingMovies,
   fetchTrendingShows,
   fetchRandomContinueWatching,
+  fetchMediaByGenre,
+  fetchAnime,
 };

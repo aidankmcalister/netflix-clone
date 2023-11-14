@@ -51,7 +51,6 @@ const ContinuteWatchingCard = () => {
           );
         })}
       />
-      <div className="h-96"></div>
     </div>
   );
 };
