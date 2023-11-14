@@ -96,7 +96,42 @@ const fetchRandomContinueWatching = async () => {
   }
 };
 
-const fetchMediaByGenre = async ({ media, genre }) => {
+const fetchNetflixOriginals = async () => {
+  try {
+    const randomCountTV = Math.floor(Math.random() * 5) + 1;
+    const randomCountMovies = Math.floor(Math.random() * 5) + 1;
+
+    const responseTV = await axios.get(
+      `${BASE_URL}/trending/tv/day?api_key=${API_KEY}&language=en-US&page=1`
+    );
+
+    const responseMovies = await axios.get(
+      `${BASE_URL}/trending/movie/day?api_key=${API_KEY}&language=en-US&page=1`
+    );
+
+    const trendingTVShows = responseTV.data.results
+      .slice(4)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, randomCountTV);
+
+    const trendingMovies = responseMovies.data.results
+      .slice(4)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, randomCountMovies);
+
+    const netflixOriginalsList = [...trendingTVShows, ...trendingMovies].slice(
+      0,
+      10
+    );
+
+    return netflixOriginalsList;
+  } catch (error) {
+    console.error("Error fetching Netflix Originals:", error);
+    throw error;
+  }
+};
+
+const fetchMediaByGenre = async ({ media, genre, originalLanguage }) => {
   const genreMapTv = {
     action: 28,
     adventure: 12,
@@ -118,6 +153,7 @@ const fetchMediaByGenre = async ({ media, genre }) => {
     war: 10752,
     western: 37,
   };
+
   try {
     const genreNum = genreMapTv[genre.toLowerCase()];
     if (genreNum === undefined) {
@@ -125,39 +161,26 @@ const fetchMediaByGenre = async ({ media, genre }) => {
       return;
     }
 
-    const response = await axios.get(
-      `${BASE_URL}/discover/${media}?api_key=${API_KEY}&with_genres=${genreNum}`
-    );
+    const apiUrl =
+      `${BASE_URL}/discover/${media}?api_key=${API_KEY}&with_genres=${genreNum}` +
+      (originalLanguage ? `&with_original_language=${originalLanguage}` : "") +
+      `&page=1`;
 
-    console.log("Complete API Response:", response.data);
+    const response = await axios.get(apiUrl);
+    const results = response.data.results;
 
-    const slicedData = response.data.results.slice(0, 25);
+    // console.log(
+    //   `Fetched ${results.length} ${media} in the ${genre} genre from page 1. First few titles:`,
+    //   results.slice(0, 5).map((item) => item.title)
+    // );
     console.log(
-      `Fetching ${media} in the ${genre} genre (genreNum: ${genreNum}):`,
-      slicedData
+      `Fetched ${results.length} ${media} in the ${genre} genre from page 1. First few titles:`,
+      results.slice(0, 5).map((item) => item.title)
     );
 
-    return slicedData;
+    return results;
   } catch (error) {
     console.error("Error fetching data:", error);
-  }
-};
-
-const fetchAnime = async (keyword) => {
-  try {
-    const response = await axios.get(
-      `${BASE_URL}/discover/tv?api_key=${API_KEY}&language=en-US&page=1&with_genres=16&query=${keyword}&include_adult=false`
-    );
-
-    const easternAnime = response.data.results.filter((show) => {
-      const easternLanguages = ["ja", "zh", "ko"];
-      return easternLanguages.includes(show.original_language);
-    });
-
-    return easternAnime.slice(0, 25);
-  } catch (error) {
-    console.error("Error fetching anime:", error);
-    throw error;
   }
 };
 
@@ -169,5 +192,5 @@ export {
   fetchTrendingShows,
   fetchRandomContinueWatching,
   fetchMediaByGenre,
-  fetchAnime,
+  fetchNetflixOriginals,
 };

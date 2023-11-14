@@ -6,7 +6,7 @@ const MediaCard = ({ media }) => {
       <img
         src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
         alt={media.title}
-        className="w-96 rounded-lg"
+        className="h-40 object-cover rounded-lg"
       />
     </div>
   );

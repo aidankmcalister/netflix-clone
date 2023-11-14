@@ -1,22 +1,33 @@
 import { useState, useEffect } from "react";
 import MyCarousel from "../MyCarousel";
 import MediaCard from "../MediaCard";
-import { fetchAnime } from "../../api/api";
+import { fetchMediaByGenre } from "../../api/api";
 
 const AnimeShowsCard = () => {
   const [animeShows, setAnimeShows] = useState([]);
 
   useEffect(() => {
-    const fetchAnimeShows = async () => {
+    const fetchAsianShows = async () => {
       try {
-        const animeShowData = await fetchAnime("anime");
-        setAnimeShows(animeShowData);
+        const options = [
+          { media: "tv", genre: "animation", originalLanguage: "ja" }, // Japanese
+          { media: "tv", genre: "animation", originalLanguage: "ko" }, // Korean
+          { media: "tv", genre: "animation", originalLanguage: "zh" }, // Chinese
+        ];
+
+        const asianShowsData = await Promise.all(
+          options.map((option) => fetchMediaByGenre(option))
+        );
+
+        const combinedAsianShows = asianShowsData.flat();
+
+        setAnimeShows(combinedAsianShows);
       } catch (error) {
-        console.error("Error fetching anime shows:", error);
+        console.error("Error fetching Asian shows:", error);
       }
     };
 
-    fetchAnimeShows();
+    fetchAsianShows();
   }, []);
 
   return (

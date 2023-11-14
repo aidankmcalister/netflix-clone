@@ -1,13 +1,40 @@
-import MyCarousel from "../MyCarousel";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import {
   InformationCircleIcon,
   BookmarkIcon as BookmarkOutline,
 } from "@heroicons/react/24/outline";
-import { BookmarkIcon as BookmarkSolid } from "@heroicons/react/24/solid";
+// import { BookmarkIcon as BookmarkSolid } from "@heroicons/react/24/solid";
 import { fetchRandomContinueWatching } from "../../api/api";
 import { useState, useEffect } from "react";
 
-const ContinuteWatchingCard = () => {
+const ContinueCarousel = ({ content }) => {
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      slidesToSlide: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 2,
+      slidesToSlide: 2,
+    },
+  };
+
+  return (
+    <Carousel swipeable={true} draggable={true} responsive={responsive}>
+      {content}
+    </Carousel>
+  );
+};
+
+const ContinueWatchingCard = () => {
   const [continueWatching, setContinueWatching] = useState([]);
 
   useEffect(() => {
@@ -25,15 +52,15 @@ const ContinuteWatchingCard = () => {
   return (
     <div>
       <h1 className="text-xl font-bold mb-2">Continue Watching</h1>
-      <MyCarousel
+      <ContinueCarousel
         content={continueWatching.map((media, index) => {
           const progressBarWidth = generateRandomWidth();
           return (
-            <div key={index} className="relative mr-3">
+            <div key={index} className="relative mr-3 w-[10rem]">
               <img
                 src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
                 alt={media.title}
-                className="w-96 rounded-lg"
+                className="rounded-lg"
               />
               <div className="w-full rounded-b-lg absolute  bottom-0  ">
                 <div className="w-full bg-gray-600 h-1">
@@ -43,8 +70,8 @@ const ContinuteWatchingCard = () => {
                   ></div>
                 </div>
                 <div className="bg-gray-900 px-1 py-1 flex items-center justify-between rounded-b-lg">
-                  <InformationCircleIcon className="w-6" />
-                  <BookmarkOutline className="w-[1.45rem]" />
+                  <InformationCircleIcon className="w-7" />
+                  <BookmarkOutline className="w-[1.75rem]" />
                 </div>
               </div>
             </div>
@@ -55,4 +82,4 @@ const ContinuteWatchingCard = () => {
   );
 };
 
-export default ContinuteWatchingCard;
+export default ContinueWatchingCard;

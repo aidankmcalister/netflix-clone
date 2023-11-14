@@ -50,7 +50,7 @@ const TopMoviesCard = () => {
       >
         {topMovies.map((movie) => (
           <div key={movie.id} className="relative w-full h-full">
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
             <img
               src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
               alt={movie.title}
