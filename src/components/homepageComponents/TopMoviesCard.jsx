@@ -47,7 +47,7 @@ const TopMoviesCard = () => {
       <img
         src={netflixLogo}
         alt="netflixLogo"
-        className="absolute z-10 w-12 mt-2"
+        className="absolute z-10 w-12 mt-2 md:hidden block"
       />
       <Carousel
         loop={true}
@@ -69,28 +69,76 @@ const TopMoviesCard = () => {
         )}
       >
         {topMovies.map((movie) => (
-          <div key={movie.id} className="relative w-full h-full">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
-            <img
-              src={`http://image.tmdb.org/t/p/original/${movie.poster_path}`}
-              alt={movie.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex">
-              <Button
-                onClick={() => handleSubmit(movie)}
-                className="flex items-center px-3 bg-white text-black mr-5 h-12"
-              >
-                <PlayIcon className="w-4 mr-2" />
-                Play
-              </Button>
-              <Button
-                className="flex items-center h-12 px-3 bg-gray-800"
-                onClick={() => handleAddToList(movie)}
-              >
-                <PlusIcon className="w-4 mr-2" />
-                My List
-              </Button>
+          <div>
+            <div
+              key={movie.id}
+              className="lg:hidden block relative w-full h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
+              <img
+                src={`http://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                alt={movie.title}
+                className="w-full h-full object-cover md:hidden block"
+              />
+              <img
+                src={`http://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                alt={movie.title}
+                className="w-full h-full object-cover md:block hidden"
+              />
+              <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex">
+                <Button
+                  onClick={() => handleSubmit(movie)}
+                  className="flex items-center px-3 bg-white text-black mr-5 h-12"
+                >
+                  <PlayIcon className="w-4 mr-2" />
+                  Play
+                </Button>
+                <Button
+                  className="flex items-center h-12 px-3 bg-gray-800"
+                  onClick={() => handleAddToList(movie)}
+                >
+                  <PlusIcon className="w-4 mr-2" />
+                  My List
+                </Button>
+              </div>
+            </div>
+            <div
+              key={movie.id}
+              className="lg:block hidden relative w-full h-full"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
+              <img
+                src={`http://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                alt={movie.title || movie.name}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute bottom-[15%] left-[10%] w-[40rem] bg-gray-900 rounded-lg p-3">
+                <div className="flex flex-col">
+                  <h1 className="text-2xl font-bold">
+                    {movie.title || movie.name}
+                  </h1>
+                  <p className="text-gray-500 text-sm my-3">{movie.overview}</p>
+                  <p className="font-semibold">
+                    {movie.vote_average.toFixed(1)} / 10
+                  </p>
+                  <div className="flex mt-3">
+                    <Button
+                      onClick={() => handleSubmit(movie)}
+                      className="flex items-center px-3 bg-white text-black mr-5 h-12 w-24"
+                    >
+                      <PlayIcon className="w-4 mr-2" />
+                      Play
+                    </Button>
+                    <Button
+                      className="flex items-center h-12 w-24 px-3 bg-gray-800"
+                      onClick={() => handleAddToList(movie)}
+                    >
+                      <PlusIcon className="w-4 mr-2" />
+                      My List
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         ))}

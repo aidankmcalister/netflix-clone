@@ -1,7 +1,7 @@
 const MyCarousel = ({ content }) => {
   return (
-    <div className="row -ml-5">
-      <div className="row__posters">{content}</div>
+    <div className="row">
+      <div className="row__posters p-5">{content}</div>
     </div>
   );
 };

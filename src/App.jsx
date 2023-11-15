@@ -30,6 +30,7 @@ function App() {
           <Navbar />
         </div>
       )}
+      {/* <div className="h-12"></div> */}
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profileselect" element={<ProfileSelect />} />

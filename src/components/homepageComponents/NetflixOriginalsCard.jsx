@@ -1,31 +1,12 @@
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { fetchNetflixOriginals } from "../../api/api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-const OriginalsCarousel = ({ content }) => {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-      slidesToSlide: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-  };
 
+const OriginalsCarousel = ({ content }) => {
   return (
-    <Carousel swipeable={true} draggable={true} responsive={responsive}>
-      {content}
-    </Carousel>
+    <div className="row">
+      <div className="row__posters">{content}</div>
+    </div>
   );
 };
 
@@ -51,20 +32,17 @@ const NetflixOriginalsCard = () => {
       <OriginalsCarousel
         content={netflixOriginals.map((media, index) => {
           return (
-            <div key={index} className="relative mr-3 w-[10rem]">
-              <Link
-                to={{
-                  pathname: `/content/${media.id}`,
-                  search: `?mediaObject=${JSON.stringify(media)}`,
-                }}
-              >
-                <img
-                  src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
-                  alt={media.title}
-                  className="rounded-lg"
-                />
-              </Link>
-            </div>
+            <img
+              key={media.id}
+              className="row__poster__continue rounded-lg h-80"
+              src={`http://image.tmdb.org/t/p/w500/${media.poster_path}`}
+              alt={media.title}
+              onClick={() => {
+                window.location.href = `/content/${
+                  media.id
+                }?mediaObject=${JSON.stringify(media)}`;
+              }}
+            />
           );
         })}
       />
