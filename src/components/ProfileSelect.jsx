@@ -16,7 +16,7 @@ const ProfileSelect = () => {
   const handleProfileClick = (profileName) => {
     console.log("Clicked on profile:", profileName);
     dispatch(setUsername(profileName)); // Set the username directly as the profile name
-    navigate("/");
+    navigate("/home");
   };
 
   return (

@@ -1,11 +1,10 @@
 import { fetchNetflixOriginals } from "../../api/api";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const OriginalsCarousel = ({ content }) => {
   return (
     <div className="row">
-      <div className="row__posters">{content}</div>
+      <div className="row__posters p-4">{content}</div>
     </div>
   );
 };

@@ -27,6 +27,10 @@
   transform: scale(1.08);
 }
 
+.row__poster__continue:hover {
+  transform: scale(1.08);
+}
+
 /* .row__posters__continue {
   display: flex;
   overflow-y: hidden;

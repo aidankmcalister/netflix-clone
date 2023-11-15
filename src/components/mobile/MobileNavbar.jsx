@@ -25,7 +25,7 @@ const MobileNavbar = ({ currentPage }) => {
     <div>
       <ul className="flex justify-center text-xs bg-[#1E1E1E] py-2">
         <li className={listItemClasses}>
-          <Link to="/" className={linkClasses("home")}>
+          <Link to="/home" className={linkClasses("home")}>
             {isCurrentPage("home") ? (
               <HomeIconSolid className={iconClasses} />
             ) : (

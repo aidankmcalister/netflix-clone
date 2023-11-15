@@ -37,7 +37,7 @@ const Navbar = ({ currentPage }) => {
         </h1>
       </div>
       <ul className="flex mr-3">
-        <Link to="/" className={linkClasses("home")}>
+        <Link to="/home" className={linkClasses("home")}>
           <li className="flex items-center mr-4">
             {isCurrentPage("home") ? (
               <HomeIconSolid className="w-7 mr-2 text-main-red" />
