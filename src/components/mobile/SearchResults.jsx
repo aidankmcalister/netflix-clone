@@ -11,12 +11,13 @@ const SearchResults = ({ results }) => {
             <div key={index}></div>
           ) : (
             <Link
+              key={index}
               to={{
                 pathname: `/content/${result.id}`,
                 search: `?mediaObject=${JSON.stringify(result)}`,
               }}
             >
-              <div key={index} className="flex w-full mb-4">
+              <div className="flex w-full mb-4">
                 <img
                   src={`http://image.tmdb.org/t/p/w500/${result.backdrop_path}`}
                   className="w-1/2"
