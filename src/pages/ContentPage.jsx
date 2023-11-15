@@ -48,7 +48,7 @@ const ContentPage = () => {
 
   if (!media) {
     return (
-      <div className="p-5 bg-gray-800 text-lg font-bold rounded-xl">
+      <div className="p-5 bg-gray-800 text-lg font-bold rounded-xl m-5">
         No media object found or invalid data.
       </div>
     );
@@ -110,6 +110,17 @@ const ContentPage = () => {
             )
           }
         />
+        {/* <MyCarousel
+          content={
+            actorIds.length > 0 ? (
+              actorIds.map((actorId) => (
+                <ActorCard key={actorId} id={actorId} />
+              ))
+            ) : (
+              <p>Loading actor details...</p>
+            )
+          }
+        /> */}
       </div>
     </div>
   );

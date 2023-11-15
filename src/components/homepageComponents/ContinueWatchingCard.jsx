@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRandomContinueWatching } from "../../api/api";
 import { Link } from "react-router-dom";
@@ -15,28 +13,10 @@ import {
 } from "../../redux/favoritesSlice";
 
 const ContinueCarousel = ({ content }) => {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-      slidesToSlide: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 2,
-      slidesToSlide: 2,
-    },
-  };
-
   return (
-    <Carousel swipeable={true} draggable={true} responsive={responsive}>
-      {content}
-    </Carousel>
+    <div className="row -ml-5">
+      <div className="row__posters">{content}</div>
+    </div>
   );
 };
 
@@ -76,7 +56,7 @@ const ContinueWatchingCard = () => {
       <h1 className="text-xl font-bold mb-2">Continue Watching</h1>
       <ContinueCarousel
         content={continueWatching.map((media, index) => (
-          <div key={index} className="relative mr-3 w-[10rem]">
+          <div key={index} className="row__poster relative mr-3 w-[10rem]">
             <Link
               to={{
                 pathname: `/content/${media.id}`,
