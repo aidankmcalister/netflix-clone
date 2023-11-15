@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 import ContentPage from "./pages/ContentPage";
 import LoginPage from "./pages/LoginPage";
 import MobileSearch from "./components/mobile/MobileSearch";
-import ProfileSelect from "./components/ProfileSelect";
+import ProfileSelectPage from "./pages/ProfileSelectPage";
 import MobileNavbar from "./components/mobile/MobileNavbar";
 import Navbar from "./components/Navbar";
 import SettingsPage from "./pages/SettingsPage";
@@ -26,24 +26,30 @@ function App() {
   return (
     <div className={`font-poppins relative overflow-x-hidden min-h-screen`}>
       {!isNavbarHidden && (
-        <div className="hidden md:block">
-          <Navbar />
+        <div>
+          <div className="hidden md:block">
+            <Navbar currentPage={currentPage} />
+          </div>
+          <div className="hidden md:block h-16"></div>
         </div>
       )}
-      {/* <div className="h-12"></div> */}
+
       <Routes>
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/profileselect" element={<ProfileSelect />} />
+        <Route path="/profileselect" element={<ProfileSelectPage />} />
         <Route path="/mobilesearch" element={<MobileSearchPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/content/:id" element={<ContentPage />} />
         <Route path="/mylist" element={<MyListPage />} />
         <Route path="/settings" element={<SettingsPage />} />
       </Routes>
-      <div className="h-20"></div>
+
       {!isNavbarHidden && (
-        <div className="block md:hidden fixed bottom-0 w-full">
-          <MobileNavbar currentPage={currentPage} />
+        <div>
+          <div className="block md:hidden fixed bottom-0 w-full">
+            <MobileNavbar currentPage={currentPage} />
+          </div>
+          <div className="block md:hidden h-16"></div>
         </div>
       )}
     </div>

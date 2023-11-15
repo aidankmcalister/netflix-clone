@@ -10,7 +10,7 @@ const MyListPage = () => {
         alt="netflixLogo"
         className="absolute z-10 w-12 right-2 top-0 mt-4"
       />
-      <div className="w-[90%] mx-auto">
+      <div className="w-[90%] mx-auto flex justify-center">
         <FavoritesCard />
       </div>
     </div>

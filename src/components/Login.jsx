@@ -14,12 +14,12 @@ const Login = () => {
     setTimeout(() => {
       setSubmitting(false);
       dispatch(setUsername(values.username));
-      navigate("/");
+      navigate("/profileselect");
     }, 400);
   };
 
   return (
-    <div className="w-[70%] flex flex-col items-center">
+    <div className="w-[70%] md:max-w-[30rem] flex flex-col items-center">
       <img src={netflixLogo} alt="netflixLogo" className="w-16" />
       <Formik
         initialValues={{ username: "", password: "" }}

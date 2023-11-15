@@ -6,7 +6,7 @@ const LoginPage = () => {
   return (
     <div className="h-screen w-screen">
       <div
-        className="h-full bg-cover flex justify-center items-center"
+        className=" h-full bg-cover flex justify-center items-center"
         // style={{ backgroundImage: `url(${netflixBackground})` }}
       >
         <Login />

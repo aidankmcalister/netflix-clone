@@ -26,7 +26,7 @@ const SettingsPage = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <div className="max-w-[90%] mx-auto">
+      <div className="max-w-[90%] lg:max-w-[60%] mx-auto">
         <img
           src={netflixLogo}
           alt="netflixLogo"

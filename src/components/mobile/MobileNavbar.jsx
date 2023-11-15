@@ -7,9 +7,7 @@ import {
 } from "@heroicons/react/24/outline";
 import {
   HomeIcon as HomeIconSolid,
-  MagnifyingGlassIcon as MagnifyingGlassIconSolid,
   StarIcon as StarIconSolid,
-  Bars3BottomRightIcon as BarsIconSolid,
 } from "@heroicons/react/24/solid";
 
 const MobileNavbar = ({ currentPage }) => {
