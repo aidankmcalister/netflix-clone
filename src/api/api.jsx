@@ -15,14 +15,48 @@ const fetchMovieDetails = async (movieId) => {
   }
 };
 
-const fetchMovieImages = async (movieId) => {
+const getRandomMedia = (mediaList, count) => {
+  return mediaList.sort(() => Math.random() - 0.5).slice(0, count);
+};
+
+const fetchRecommendedMoviesAndShows = async () => {
   try {
-    const response = await axios.get(
-      `${BASE_URL}/movie/${movieId}/images?api_key=${API_KEY}`
+    const [movieResponse, tvResponse] = await Promise.all([
+      axios.get(
+        `${BASE_URL}/movie/popular?api_key=${API_KEY}&language=en&page=1&language=en`
+      ),
+      axios.get(
+        `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=en&page=1&language=en`
+      ),
+    ]);
+
+    if (!movieResponse?.data?.results || !tvResponse?.data?.results) {
+      throw new Error("Invalid response data");
+    }
+
+    const filterPopularAndShortNames = (mediaList) =>
+      mediaList
+        .filter(
+          (media) =>
+            media.popularity > 50 &&
+            media.name?.length <= 24 &&
+            media.poster_path
+        )
+        .slice(0, 5);
+
+    const randomMovies = getRandomMedia(
+      filterPopularAndShortNames(movieResponse.data.results),
+      0
     );
-    return response.data;
+
+    const randomShows = getRandomMedia(
+      filterPopularAndShortNames(tvResponse.data.results),
+      5
+    );
+
+    return [...randomMovies, ...randomShows];
   } catch (error) {
-    console.error("Error fetching movie images:", error);
+    console.error("Error fetching recommended movies and shows:", error);
     throw error;
   }
 };
@@ -211,9 +245,23 @@ const fetchActorDetails = async (actorId) => {
   }
 };
 
+const searchMoviesAndShows = async (query) => {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/search/multi?api_key=${API_KEY}&query=${query}&language=en&page=1`
+    );
+
+    if (response?.data?.results) {
+      return response.data.results.slice(0, 15);
+    }
+  } catch (error) {
+    console.error("Error searching movies and shows:", error);
+    throw error;
+  }
+};
+
 export {
   fetchMovieDetails,
-  fetchMovieImages,
   fetchPopularMovies,
   fetchTrendingMovies,
   fetchTrendingShows,
@@ -222,4 +270,6 @@ export {
   fetchNetflixOriginals,
   fetchActorsFromMediaId,
   fetchActorDetails,
+  fetchRecommendedMoviesAndShows,
+  searchMoviesAndShows,
 };

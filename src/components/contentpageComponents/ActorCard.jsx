@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchActorDetails } from "../../../api/api";
+import { fetchActorDetails } from "../../api/api";
 
 const ActorCard = ({ id }) => {
   const [actorDetails, setActorDetails] = useState(null);

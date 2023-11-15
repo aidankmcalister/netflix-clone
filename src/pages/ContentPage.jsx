@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchActorsFromMediaId } from "../api/api";
 import MyCarousel from "../components/MyCarousel";
-import ActorCard from "../components/homepageComponents/contentpageComponents/ActorCard";
+import ActorCard from "../components/contentpageComponents/ActorCard";
 import { Button } from "@material-tailwind/react";
 import { PlusIcon, PlayIcon } from "@heroicons/react/24/solid";
 import {

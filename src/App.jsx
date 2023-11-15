@@ -9,6 +9,7 @@ import MobileNavbar from "./components/mobile/MobileNavbar";
 import Navbar from "./components/Navbar";
 import SettingsPage from "./pages/SettingsPage";
 import MyListPage from "./pages/MyListPage";
+import MobileSearchPage from "./pages/MobileSearchPage";
 
 function App() {
   const location = useLocation();
@@ -32,7 +33,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/profileselect" element={<ProfileSelect />} />
-        <Route path="/mobilesearch" element={<MobileSearch />} />
+        <Route path="/mobilesearch" element={<MobileSearchPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/content/:id" element={<ContentPage />} />
         <Route path="/mylist" element={<MyListPage />} />

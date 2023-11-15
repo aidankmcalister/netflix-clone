@@ -5,29 +5,36 @@ import { Link } from "react-router-dom";
 
 const FavoritesCard = () => {
   const favorites = useSelector(selectFavorites);
-  console.log("Favorites:", favorites);
 
   return (
-    <div>
+    <div className="flex flex-col h-screen">
       <h1 className="text-4xl font-bold mt-7">My List</h1>
-      <div className="grid grid-cols-2 gap-4 mt-4">
-        {favorites.map((favorite) => (
-          <div className="">
-            <Link
-              to={{
-                pathname: `/content/${favorite.id}`,
-                search: `?mediaObject=${JSON.stringify(favorite)}`,
-              }}
-            >
-              <img
-                src={`http://image.tmdb.org/t/p/w500/${favorite.poster_path}`}
-                alt={favorite.title}
-                className="h-64 object-cover rounded-lg"
-              />
-            </Link>
-          </div>
-        ))}
-      </div>
+      {favorites.length > 0 ? (
+        <div className="grid grid-cols-2 gap-4 mt-4">
+          {favorites.map((favorite) => (
+            <div key={favorite.id}>
+              <Link
+                to={{
+                  pathname: `/content/${favorite.id}`,
+                  search: `?mediaObject=${JSON.stringify(favorite)}`,
+                }}
+              >
+                <img
+                  src={`http://image.tmdb.org/t/p/w500/${favorite.poster_path}`}
+                  alt={favorite.title}
+                  className="h-64 object-cover rounded-lg"
+                />
+              </Link>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="bg-gray-900 rounded-lg h-52 mx-2 flex justify-center items-center mt-7">
+          <h1 className="font-semibold text-center text-3xl p-5">
+            Sorry! You have nothing in your list.
+          </h1>
+        </div>
+      )}
     </div>
   );
 };
