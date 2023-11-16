@@ -64,13 +64,13 @@ const ContentPage = () => {
   };
 
   return (
-    <div className="flex-col flex overflow-x-hidden">
+    <div className="flex-col flex overflow-x-hidden items-center">
       <img
         src={`http://image.tmdb.org/t/p/original/${media.backdrop_path}`}
         alt={media.name || media.title}
         className="flex-none shadow-xl"
       />
-      <div className="m-3 -mt-5 bg-gray-900 p-4 rounded-lg shadow-lg">
+      <div className="m-3 -mt-5 bg-gray-900 p-4 rounded-lg shadow-lg md:max-w-[70%] lg:max-w-[30%]">
         <div className="flex justify-between items-center mb-2">
           <h1 className="text-3xl font-bold">{media.name || media.title}</h1>
           <p className="font-bold w-[25%] ml-2 text-center">
@@ -97,30 +97,21 @@ const ContentPage = () => {
           </Button>
         </div>
       </div>
-      <div className="flex-grow mx-3">
-        <h1 className="font-bold text-xl">Top Actors</h1>
-        <MyCarousel
-          content={
-            actorIds.length > 0 ? (
-              actorIds.map((actorId) => (
-                <ActorCard key={actorId} id={actorId} />
-              ))
-            ) : (
-              <p>Loading actor details...</p>
-            )
-          }
-        />
-        {/* <MyCarousel
-          content={
-            actorIds.length > 0 ? (
-              actorIds.map((actorId) => (
-                <ActorCard key={actorId} id={actorId} />
-              ))
-            ) : (
-              <p>Loading actor details...</p>
-            )
-          }
-        /> */}
+      <div className="w-full">
+        <div className="flex-grow mx-3">
+          <h1 className="font-bold text-xl">Top Actors</h1>
+          <MyCarousel
+            content={
+              actorIds.length > 0 ? (
+                actorIds.map((actorId) => (
+                  <ActorCard key={actorId} id={actorId} />
+                ))
+              ) : (
+                <p>Loading actor details...</p>
+              )
+            }
+          />
+        </div>
       </div>
     </div>
   );
