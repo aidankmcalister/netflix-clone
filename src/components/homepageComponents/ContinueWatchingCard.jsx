@@ -1,24 +1,19 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import { fetchRandomContinueWatching } from "../../api/api";
 
-import {
-  addToFavorites,
-  removeFromFavorites,
-  selectFavorites,
-} from "../../redux/favoritesSlice";
-
+// eslint-disable-next-line react/prop-types
 const ContinueCarousel = ({ content }) => {
   return (
     <div className="row">
-      <div className="row__posters p-4">{content}</div>
+      <div className="row__posters p-4 flex flex-nowrap overflow-x-auto">
+        {content}
+      </div>
     </div>
   );
 };
 
 const ContinueWatchingCard = () => {
-  const dispatch = useDispatch();
-  const favorites = useSelector(selectFavorites);
   const [continueWatching, setContinueWatching] = useState([]);
 
   useEffect(() => {
@@ -38,20 +33,20 @@ const ContinueWatchingCard = () => {
     return Math.floor(Math.random() * 81) + 15;
   }
 
-  const handleBookmarkClick = (media) => {
-    const isFavorite = favorites.some((favorite) => favorite.id === media.id);
-    if (isFavorite) {
-      dispatch(removeFromFavorites(media.id));
-    } else {
-      dispatch(addToFavorites(media));
-    }
-  };
+  // const handleBookmarkClick = (media) => {
+  //   const isFavorite = favorites.some((favorite) => favorite.id === media.id);
+  //   if (isFavorite) {
+  //     dispatch(removeFromFavorites(media.id));
+  //   } else {
+  //     dispatch(addToFavorites(media));
+  //   }
+  // };
 
   return (
     <div className="">
       <h1 className="text-xl font-bold mb-2">Continue Watching</h1>
       <ContinueCarousel
-        content={continueWatching.map((media, index) => (
+        content={continueWatching.map((media) => (
           <img
             key={media.id}
             className="row__poster__continue rounded-lg h-80"
