@@ -15,8 +15,7 @@ const SearchResults = ({ results }) => {
               to={{
                 pathname: `/content/${result.id}`,
                 search: `?mediaObject=${JSON.stringify(result)}`,
-              }}
-            >
+              }}>
               <div className="flex w-full mb-4">
                 <img
                   src={`http://image.tmdb.org/t/p/w500/${result.backdrop_path}`}
