@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import netflixLogo from "../assets/imgs/netflixLogo.png";
+import netflixLogo from "../assets/imgs/play-button-svgrepo-com.svg";
 import { Select, Option } from "@material-tailwind/react";
 import { Switch, createTheme, ThemeProvider } from "@mui/material";
 import { TrashIcon } from "@heroicons/react/24/outline";

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { selectUsername } from "../redux/userSlice";
-import netflixLogo from "../assets/imgs/netflixLogo.png";
+import netflixLogo from "../assets/imgs/play-button-svgrepo-com.svg";
 import { Link } from "react-router-dom";
 import {
   HomeIcon as HomeIconOutline,

@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { validateLogin } from "../utils/validateLogin";
 import { Button, Checkbox } from "@material-tailwind/react";
-import netflixLogo from "../assets/imgs/netflixLogo.png";
+import netflixLogo from "../assets/imgs/play-button-svgrepo-com.svg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUsername } from "../redux/userSlice";
@@ -24,8 +24,7 @@ const Login = () => {
       <Formik
         initialValues={{ username: "", password: "" }}
         validate={validateLogin}
-        onSubmit={handleSubmit}
-      >
+        onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form className="w-full">
             <div className="mb-7 mt-5">
@@ -57,8 +56,7 @@ const Login = () => {
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-main-red mb-3"
-            >
+              className="w-full bg-main-red mb-3">
               Sign In
             </Button>
             <Checkbox color="red" label="Remember Me" />

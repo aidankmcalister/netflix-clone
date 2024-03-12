@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchPopularMovies } from "../../api/api";
 import { Button, Carousel } from "@material-tailwind/react";
-import netflixLogo from "../../assets/imgs/netflixLogo.png";
+import netflixLogo from "../../assets/imgs/play-button-svgrepo-com.svg";
 import { PlusIcon, PlayIcon } from "@heroicons/react/24/solid";
 import {
   addToFavorites,
@@ -66,14 +66,12 @@ const TopMoviesCard = () => {
               />
             ))}
           </div>
-        )}
-      >
+        )}>
         {topMovies.map((movie) => (
           <div>
             <div
               key={movie.id}
-              className="lg:hidden block relative w-full h-full"
-            >
+              className="lg:hidden block relative w-full h-full">
               <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
               <img
                 src={`http://image.tmdb.org/t/p/original/${movie.poster_path}`}
@@ -88,15 +86,13 @@ const TopMoviesCard = () => {
               <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex">
                 <Button
                   onClick={() => handleSubmit(movie)}
-                  className="flex items-center px-3 bg-white text-black mr-5 h-12"
-                >
+                  className="flex items-center px-3 bg-white text-black mr-5 h-12">
                   <PlayIcon className="w-4 mr-2" />
                   Play
                 </Button>
                 <Button
                   className="flex items-center h-12 px-3 bg-gray-800"
-                  onClick={() => handleAddToList(movie)}
-                >
+                  onClick={() => handleAddToList(movie)}>
                   <PlusIcon className="w-4 mr-2" />
                   My List
                 </Button>
@@ -104,8 +100,7 @@ const TopMoviesCard = () => {
             </div>
             <div
               key={movie.id}
-              className="lg:block hidden relative w-full h-full"
-            >
+              className="lg:block hidden relative w-full h-full">
               <div className="absolute inset-0 bg-gradient-to-t from-[#181818] via-transparent to-transparent" />
               <img
                 src={`http://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
@@ -124,15 +119,13 @@ const TopMoviesCard = () => {
                   <div className="flex mt-3">
                     <Button
                       onClick={() => handleSubmit(movie)}
-                      className="flex items-center px-3 bg-white text-black mr-5 h-12 w-24"
-                    >
+                      className="flex items-center px-3 bg-white text-black mr-5 h-12 w-24">
                       <PlayIcon className="w-4 mr-2" />
                       Play
                     </Button>
                     <Button
                       className="flex items-center h-12 w-24 px-3 bg-gray-800"
-                      onClick={() => handleAddToList(movie)}
-                    >
+                      onClick={() => handleAddToList(movie)}>
                       <PlusIcon className="w-4 mr-2" />
                       My List
                     </Button>

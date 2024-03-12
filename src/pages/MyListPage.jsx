@@ -1,6 +1,6 @@
 import React from "react";
 import FavoritesCard from "../components/myListComponents/FavoritesCard";
-import netflixLogo from "../assets/imgs/netflixLogo.png";
+import netflixLogo from "../assets/imgs/play-button-svgrepo-com.svg";
 
 const MyListPage = () => {
   return (
